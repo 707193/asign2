@@ -13,7 +13,9 @@ namespace asign2
             var orderProcessor = new OrderProcessor();
             var Order = new Order { DatePlaced = DateTime.Now, TotalPrice = 100f };
             orderProcessor.Process();
-
+        }
+    }
+}
             public class OrderProcessor
         {
             private readonly ShippingCalculator _shippingCalculator;
@@ -32,8 +34,4 @@ namespace asign2
 
                 }
             }
-    }
-
-}
-    }
-}
+    
