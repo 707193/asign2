@@ -15,23 +15,40 @@ namespace asign2
             orderProcessor.Process();
         }
     }
-}
-            public class OrderProcessor
+
+    public class OrderProcessor
+    {
+        private readonly ShippingCalculator _shippingCalculator;
+        public OrderProcessor()
         {
-            private readonly ShippingCalculator _shippingCalculator;
-            public OrderProcessor()
-       {
             _shipppingCalculator = new ShippingCalculator();
         }
-            public void Process(Order order) {
-                if (order.IsShipped)
-                    throw new InvalidOperationException("This order is shipped.");
+        public void Process(Order order) {
+            if (order.IsShipped)
+                throw new InvalidOperationException("This order is shipped.");
 
-                order.Shipment = new Shipment
-                {
-                    Cost = _shippingCalculator.CalculatorShipping(order),
-                    ShippingDate = DateTime.Today.AddDays(1);
+            order.Shipment = new Shipment
+            {
+                Cost = _shippingCalculator.CalculatorShipping(order),
+                ShippingDate = DateTime.Today.AddDays(1);
 
-                }
-            }
-    
+        }
+    }
+
+    public class ShippingCalculator
+    {
+        public float CalculateShipping(Order order)
+        {
+            if (order.TotalPrice < 30f) return order.TotalPrice * 0.1f;
+            return 0;
+        }
+
+    }
+
+
+}
+
+
+
+
+
