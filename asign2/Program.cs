@@ -10,6 +10,9 @@ namespace asign2
     {
         static void Main(string[] args)
         {
+            var orderProcessor = new OrderProcessor();
+            var Order = new Order { DatePlaced = DateTime.Now, TotalPrice = 100f };
+            orderProcessor.Process(order);
         }
     }
 }
