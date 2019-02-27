@@ -12,7 +12,28 @@ namespace asign2
         {
             var orderProcessor = new OrderProcessor();
             var Order = new Order { DatePlaced = DateTime.Now, TotalPrice = 100f };
-            orderProcessor.Process(order);
+            orderProcessor.Process();
+
+            public class OrderProcessor
+        {
+            private readonly ShippingCalculator _shippingCalculator;
+            public OrderProcessor()
+       {
+            _shipppingCalculator = new ShippingCalculator();
         }
+            public void Process(Order order) {
+                if (order.IsShipped)
+                    throw new InvalidOperationException("This order is shipped.");
+
+                order.Shipment = new Shipment
+                {
+                    Cost = _shippingCalculator.CalculatorShipping(order),
+                    ShippingDate = DateTime.Today.AddDays(1);
+
+                }
+            }
+    }
+
+}
     }
 }
